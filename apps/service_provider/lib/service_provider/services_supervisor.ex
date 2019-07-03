@@ -1,4 +1,4 @@
-defmodule ServiceProvider.ProviderSupervisor do
+defmodule ServiceProvider.ServicesSupervisor do
   use DynamicSupervisor
   alias ServiceProvider.ServiceHandler
 

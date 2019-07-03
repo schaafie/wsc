@@ -5,15 +5,15 @@ defmodule ServiceManagerWeb.ServiceController do
   alias ServiceManager.ServiceComponents
   alias ServiceManager.Services.Service
 
-  def proces(conn,%{"services" => services}) do
+  def proces(conn, %{"services" => services}) do
     callback = ServiceComponents.proces_services(services)
     result = ServiceComponents.get_services(callback)
-    render(conn, "index.json", response: {services: result, callback: callback})
+    render(conn, "index.json", response: [services: result, callback: callback])
   end
 
-  def procesUpdate(conn,%{"callback" => callback}) do
+  def procesUpdate(conn, %{"callback" => callback}) do
     result = ServiceComponents.get_services(callback)
-    render(conn, "index.json", response: {services: result, callback: callback})
+    render(conn, "index.json", response: [services: result, callback: callback])
   end
 
   def index(conn, _params) do

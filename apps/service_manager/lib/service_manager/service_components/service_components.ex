@@ -16,7 +16,7 @@ defmodule ServiceManager.ServiceComponents do
     servicenumber = System.unique_integer([])
     wsc_name = "wsc_#{servicenumber}"
     ProviderSupervisor.start_child(wsc_name)
-    ServiceCoordinator.start(wsc_name, list)
+    ServiceCoordinator.start(wsc_name, serviceslist)
     wsc_name
   end
 

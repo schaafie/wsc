@@ -23,15 +23,19 @@ defmodule ServiceProvider.ServiceCoordinator do
     ## loop services_list
     ## return items that have status complete and close them
     ## return also the item count of items yet to be resolved
-    {:reply, {resolved: resolved, remaining: count} , services2resolve}
+    resolved=[]
+    count=0
+    services2resolve = serviceslist
+    {:reply, %{resolved: resolved, remaining: count} , services2resolve}
   end
 
   def handle_call({:update, service, update}, from, serviceslist) do
     # find and replace data in from element
+    updatedservices = serviceslist
     {:noreply, updatedservices}
   end
 
-  defp start_services(services_list), do: start_service(services_list)
+  defp start_services(services_list), do: start_service([],services_list)
   defp start_service(started_services, []), do: started_services
   defp start_service(started_services, [service|services_list]) do
     started_service = do_start_service(service)
