@@ -4,11 +4,12 @@ defmodule ServiceProvider.ServiceHandler do
   require "HTTPoison"
 
   def start_link(state), do: GenServer.start_link(__MODULE__, state, name: __MODULE__)
-  def execute(pid, service), do: GenServer.cast(pid, {:exec, service})
+  def execute(pid), do: GenServer.cast(pid, :exec)
   def getStatus(pid), do: GenServer.call(pid, :get)
+  def stop(pid), do: GenServer.stop(pid, :normal)
 
   ## Callbacks
-  def init(state), do: {:ok, state}
+  def init(service), do: {:ok, service}
 
   def handle_cast(:exec, from, service) do
     url = "#{service.url}?#{api_key}"
@@ -19,6 +20,5 @@ defmodule ServiceProvider.ServiceHandler do
   end
 
   def handle_call(:get, _from, state), do: {:reply, state.response, state}
-  def handle_info(:stop, state), do: {:stop, :normal, state}
 
 end

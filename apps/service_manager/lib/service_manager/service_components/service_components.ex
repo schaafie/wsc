@@ -5,6 +5,7 @@ defmodule ServiceManager.ServiceComponents do
 
   import Ecto.Query, warn: false
   alias ServiceProvider.ProviderSupervisor
+  alias ServiceProvider.ServiceCoordinator
 
   @doc """
   Start proces of list of services.
@@ -13,8 +14,10 @@ defmodule ServiceManager.ServiceComponents do
   """
   def proces_services(serviceslist) do
     servicenumber = System.unique_integer([])
-    ProviderSupervisor.start_child(servicenumber)
-    
+    wsc_name = "wsc_#{servicenumber}"
+    ProviderSupervisor.start_child(wsc_name)
+    ServiceCoordinator.start(wsc_name, list)
+    wsc_name
   end
 
   @doc """
@@ -24,8 +27,8 @@ defmodule ServiceManager.ServiceComponents do
 
   """
 
-  def get_services(callback) do
-    raise "TODO"
+  def get_services(wsc_name) do
+    ServiceCoordinator.getResolved(wsc_name)
   end
 
 

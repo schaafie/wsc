@@ -7,24 +7,26 @@ defmodule ServiceProvider.ServiceCoordinator do
   ## API
   def start_link(name), do: GenServer.start_link(__MODULE__, name, name: via_tuple(name))
   def stop(name), do: GenServer.stop(via_tuple(name))
-  def start(name, list), do: GenServer.cast(via_tuple(name), {:start, list})
-  def getResolved(name), do: GenServer.call(via_tuple(name), {:get_resolved})
+  def start(name, list), do: GenServer.call(via_tuple(name), {:start, list})
+  def getResolved(name), do: GenServer.call(via_tuple(name), :get_resolved)
   def update(name, service, status), do: GenServer.call(via_tuple(name), {:update, service, status})
 
   ## Callbacks
   def init(state), do: {:ok, state}
 
-  def handle_cast(:start, _from, serviceslist) do
-    state = start_services(serviceslist)
-    {:noreply, state}
+  def handle_call({:start, list}, from, state) do
+    serviceslist = start_services(list)
+    {:noreply, serviceslist}
   end
 
-  def handle_call({:get_resolved, _from, serviceslist) do
-
-    {:reply, resolved, services2resolve}
+  def handle_call(:get_resolved, _from, serviceslist) do
+    ## loop services_list
+    ## return items that have status complete and close them
+    ## return also the item count of items yet to be resolved
+    {:reply, {resolved: resolved, remaining: count} , services2resolve}
   end
 
-  def handle_cast({:update, from, update) do
+  def handle_call({:update, service, update}, from, serviceslist) do
     # find and replace data in from element
     {:noreply, updatedservices}
   end
@@ -37,7 +39,8 @@ defmodule ServiceProvider.ServiceCoordinator do
   end
 
   defp do_start_service(service) do
-    %{service: }
+    {:ok, pid} = ServiceProvider.ProviderSupervisor.start_link(service)
+    Map.put_new(service, :pid, pid)
   end
 
   defp via_tuple(name), do: {:via, Registry, {@registry, name} }
