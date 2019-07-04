@@ -6,6 +6,7 @@ defmodule ServiceManager.Repo.Migrations.CreateServices do
       add :name, :string
       add :url, :string
       add :args, :string
+      add :timeout, :integer
 
       timestamps()
     end

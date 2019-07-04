@@ -6,9 +6,9 @@ defmodule ServiceManager.ServicesTest do
   describe "services" do
     alias ServiceManager.Services.Service
 
-    @valid_attrs %{args: "some args", name: "some name", url: "some url"}
-    @update_attrs %{args: "some updated args", name: "some updated name", url: "some updated url"}
-    @invalid_attrs %{args: nil, name: nil, url: nil}
+    @valid_attrs %{args: "some args", name: "some name", timeout: 42, url: "some url"}
+    @update_attrs %{args: "some updated args", name: "some updated name", timeout: 43, url: "some updated url"}
+    @invalid_attrs %{args: nil, name: nil, timeout: nil, url: nil}
 
     def service_fixture(attrs \\ %{}) do
       {:ok, service} =
@@ -33,6 +33,7 @@ defmodule ServiceManager.ServicesTest do
       assert {:ok, %Service{} = service} = Services.create_service(@valid_attrs)
       assert service.args == "some args"
       assert service.name == "some name"
+      assert service.timeout == 42
       assert service.url == "some url"
     end
 
@@ -42,10 +43,10 @@ defmodule ServiceManager.ServicesTest do
 
     test "update_service/2 with valid data updates the service" do
       service = service_fixture()
-      assert {:ok, service} = Services.update_service(service, @update_attrs)
-      assert %Service{} = service
+      assert {:ok, %Service{} = service} = Services.update_service(service, @update_attrs)
       assert service.args == "some updated args"
       assert service.name == "some updated name"
+      assert service.timeout == 43
       assert service.url == "some updated url"
     end
 

@@ -1,4 +1,4 @@
-<h2>Show Service</h2>
+<h1>Show Service</h1>
 
 <ul>
 
@@ -17,7 +17,12 @@
     <%= @service.args %>
   </li>
 
+  <li>
+    <strong>Timeout:</strong>
+    <%= @service.timeout %>
+  </li>
+
 </ul>
 
-<span><%= link "Edit", to: service_path(@conn, :edit, @service) %></span>
-<span><%= link "Back", to: service_path(@conn, :index) %></span>
+<span><%= link "Edit", to: Routes.service_path(@conn, :edit, @service) %></span>
+<span><%= link "Back", to: Routes.service_path(@conn, :index) %></span>

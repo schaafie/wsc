@@ -5,25 +5,23 @@
     </div>
   <% end %>
 
-  <div class="form-group">
-    <%= label f, :name, class: "control-label" %>
-    <%= text_input f, :name, class: "form-control" %>
-    <%= error_tag f, :name %>
-  </div>
+  <%= label f, :name %>
+  <%= text_input f, :name %>
+  <%= error_tag f, :name %>
 
-  <div class="form-group">
-    <%= label f, :url, class: "control-label" %>
-    <%= text_input f, :url, class: "form-control" %>
-    <%= error_tag f, :url %>
-  </div>
+  <%= label f, :url %>
+  <%= text_input f, :url %>
+  <%= error_tag f, :url %>
 
-  <div class="form-group">
-    <%= label f, :args, class: "control-label" %>
-    <%= text_input f, :args, class: "form-control" %>
-    <%= error_tag f, :args %>
-  </div>
+  <%= label f, :args %>
+  <%= text_input f, :args %>
+  <%= error_tag f, :args %>
 
-  <div class="form-group">
-    <%= submit "Submit", class: "btn btn-primary" %>
+  <%= label f, :timeout %>
+  <%= number_input f, :timeout %>
+  <%= error_tag f, :timeout %>
+
+  <div>
+    <%= submit "Save" %>
   </div>
 <% end %>

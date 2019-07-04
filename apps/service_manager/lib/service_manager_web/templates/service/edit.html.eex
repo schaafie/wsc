@@ -1,5 +1,5 @@
-<h2>Edit Service</h2>
+<h1>Edit Service</h1>
 
-<%= render "form.html", Map.put(assigns, :action, service_path(@conn, :update, @service)) %>
+<%= render "form.html", Map.put(assigns, :action, Routes.service_path(@conn, :update, @service)) %>
 
-<span><%= link "Back", to: service_path(@conn, :index) %></span>
+<span><%= link "Back", to: Routes.service_path(@conn, :index) %></span>

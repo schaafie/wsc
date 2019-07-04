@@ -1,5 +1,5 @@
-<h2>New Service</h2>
+<h1>New Service</h1>
 
-<%= render "form.html", Map.put(assigns, :action, service_path(@conn, :create)) %>
+<%= render "form.html", Map.put(assigns, :action, Routes.service_path(@conn, :create)) %>
 
-<span><%= link "Back", to: service_path(@conn, :index) %></span>
+<span><%= link "Back", to: Routes.service_path(@conn, :index) %></span>

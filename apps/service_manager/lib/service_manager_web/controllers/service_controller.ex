@@ -2,7 +2,6 @@ defmodule ServiceManagerWeb.ServiceController do
   use ServiceManagerWeb, :controller
 
   alias ServiceManager.Services
-  alias ServiceManager.ServiceComponents
   alias ServiceManager.Services.Service
 
   def proces(conn, %{"services" => services}) do
@@ -31,7 +30,8 @@ defmodule ServiceManagerWeb.ServiceController do
       {:ok, service} ->
         conn
         |> put_flash(:info, "Service created successfully.")
-        |> redirect(to: service_path(conn, :show, service))
+        |> redirect(to: Routes.service_path(conn, :show, service))
+
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)
     end
@@ -55,7 +55,8 @@ defmodule ServiceManagerWeb.ServiceController do
       {:ok, service} ->
         conn
         |> put_flash(:info, "Service updated successfully.")
-        |> redirect(to: service_path(conn, :show, service))
+        |> redirect(to: Routes.service_path(conn, :show, service))
+
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "edit.html", service: service, changeset: changeset)
     end
@@ -67,6 +68,6 @@ defmodule ServiceManagerWeb.ServiceController do
 
     conn
     |> put_flash(:info, "Service deleted successfully.")
-    |> redirect(to: service_path(conn, :index))
+    |> redirect(to: Routes.service_path(conn, :index))
   end
 end

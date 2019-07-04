@@ -20,26 +20,28 @@ defmodule ServiceManagerWeb do
   def controller do
     quote do
       use Phoenix.Controller, namespace: ServiceManagerWeb
+
       import Plug.Conn
-      import ServiceManagerWeb.Router.Helpers
       import ServiceManagerWeb.Gettext
+      alias ServiceManagerWeb.Router.Helpers, as: Routes
     end
   end
 
   def view do
     quote do
-      use Phoenix.View, root: "lib/service_manager_web/templates",
-                        namespace: ServiceManagerWeb
+      use Phoenix.View,
+        root: "lib/service_manager_web/templates",
+        namespace: ServiceManagerWeb
 
       # Import convenience functions from controllers
-      import Phoenix.Controller, only: [get_flash: 2, view_module: 1]
+      import Phoenix.Controller, only: [get_flash: 1, get_flash: 2, view_module: 1]
 
       # Use all HTML functionality (forms, tags, etc)
       use Phoenix.HTML
 
-      import ServiceManagerWeb.Router.Helpers
       import ServiceManagerWeb.ErrorHelpers
       import ServiceManagerWeb.Gettext
+      alias ServiceManagerWeb.Router.Helpers, as: Routes
     end
   end
 

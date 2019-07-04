@@ -1,11 +1,12 @@
-<h2>Listing Services</h2>
+<h1>Listing Services</h1>
 
-<table class="table">
+<table>
   <thead>
     <tr>
       <th>Name</th>
       <th>Url</th>
       <th>Args</th>
+      <th>Timeout</th>
 
       <th></th>
     </tr>
@@ -16,15 +17,16 @@
       <td><%= service.name %></td>
       <td><%= service.url %></td>
       <td><%= service.args %></td>
+      <td><%= service.timeout %></td>
 
-      <td class="text-right">
-        <span><%= link "Show", to: service_path(@conn, :show, service), class: "btn btn-default btn-xs" %></span>
-        <span><%= link "Edit", to: service_path(@conn, :edit, service), class: "btn btn-default btn-xs" %></span>
-        <span><%= link "Delete", to: service_path(@conn, :delete, service), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
+      <td>
+        <%= link "Show", to: Routes.service_path(@conn, :show, service) %>
+        <%= link "Edit", to: Routes.service_path(@conn, :edit, service) %>
+        <%= link "Delete", to: Routes.service_path(@conn, :delete, service), method: :delete, data: [confirm: "Are you sure?"] %>
       </td>
     </tr>
 <% end %>
   </tbody>
 </table>
 
-<span><%= link "New Service", to: service_path(@conn, :new) %></span>
+<span><%= link "New Service", to: Routes.service_path(@conn, :new) %></span>

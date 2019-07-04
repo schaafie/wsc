@@ -3,7 +3,7 @@ use Mix.Config
 # We don't run a server during test. If one is required,
 # you can enable the server option below.
 config :service_manager, ServiceManagerWeb.Endpoint,
-  http: [port: 4001],
+  http: [port: 4002],
   server: false
 
 # Print only warnings and errors during test
@@ -11,15 +11,8 @@ config :logger, level: :warn
 
 # Configure your database
 config :service_manager, ServiceManager.Repo,
-  adapter: Ecto.Adapters.Postgres,
   username: "postgres",
   password: "postgres",
   database: "service_manager_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
-
-config :service_manager, authentication: [
-    username: "user",
-    password: "password",
-    realm:    "Development Realm"
-  ]
