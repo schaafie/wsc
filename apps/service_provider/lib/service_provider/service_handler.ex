@@ -3,7 +3,7 @@ defmodule ServiceProvider.ServiceHandler do
 
   require HTTPoison
 
-  def start_link(state), do: GenServer.start_link(__MODULE__, state, name: __MODULE__)
+  def start_link(state), do: GenServer.start_link(__MODULE__, state, [])
   def execute(pid), do: GenServer.cast(pid, :exec)
   def getStatus(pid), do: GenServer.call(pid, :get)
   def stop(pid), do: GenServer.stop(pid, :normal)

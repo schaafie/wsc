@@ -11,7 +11,7 @@ defmodule ServiceManagerWeb.ServiceController do
   end
 
   def procesUpdate(conn, %{"callback" => callback}) do
-    result = ServiceComponents.get_services(callback)
+    result = ServiceManager.ServiceComponents.get_services(callback)
     render(conn, "index.json", response: [services: result, callback: callback])
   end
 
