@@ -7,7 +7,7 @@ defmodule ServiceProvider.ServicesSupervisor do
   def init(_arg), do: DynamicSupervisor.init(strategy: :one_for_one)
 
   def start_child(args) do
-    spec = {ServiceHandler, args: args}
+    spec = %{id: ServiceHandler, start: { ServiceHandler, :start_link, [ args ] } }
     DynamicSupervisor.start_child(  __MODULE__, spec )
   end
 

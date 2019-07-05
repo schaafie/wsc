@@ -1,11 +1,11 @@
 defmodule ServiceManagerWeb.ServiceController do
   use ServiceManagerWeb, :controller
-
   alias ServiceManager.Services
   alias ServiceManager.Services.Service
 
-  def proces(conn, %{"services" => services}) do
-    callback = ServiceManager.ServiceComponents.proces_services(services)
+  def proces(conn,%{"data" => params}) do
+    %{"services" => servicelist} = Jason.decode!(params)
+    callback = ServiceManager.ServiceComponents.proces_services(servicelist)
     result = ServiceManager.ServiceComponents.get_services(callback)
     render(conn, "index.json", response: [services: result, callback: callback])
   end

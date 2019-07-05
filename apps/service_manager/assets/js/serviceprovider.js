@@ -2,10 +2,10 @@ var httpRequest;
 var serviceURL = './api/wsc'
 
 document.addEventListener("DOMContentLoaded", () => {
-  var request = [];
+  var request = {"services":[]};
   var sl = document.getElementsByClassName("serviceplaceholder");
   for (let item of sl) {
-    request.push({
+    request.services.push({
       id: item.id,
       service: item.attributes.service.nodeValue,
       args: item.attributes.args.nodeValue
@@ -25,7 +25,7 @@ function makeRequest(request) {
   httpRequest.onreadystatechange = processResponse;
   httpRequest.open('POST', serviceURL);
   httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-  httpRequest.send( "services="+JSON.stringify(request) );
+  httpRequest.send( "data="+JSON.stringify(request) );
 }
 
 function processResponse() {
