@@ -1,0 +1,30 @@
+<div class="grid-container">
+  <div class="grid-header">
+    <img src="https://www.rabobank.nl/static/appls/responsive-template-versions/1.0.172/rabobank-logo.png" class="logo" />
+    <span class="title">Site name</<span>
+  </div>
+  <div class="grid-nav">
+    <ul class="main-menu">
+      <li><a href="#">Link 1</a></li>
+      <li><a href="#">Link 2</a></li>
+      <li><a href="#">Link 3</a></li>
+      <li><a href="#">Link 4</a></li>
+    </ul>
+  </div>
+  <div class="grid-item grid-content">
+    <div class="serviceplaceholder" id="content" service="knowledge" args="articleid=1" >loading</div>
+  </div>
+  <div class="grid-item grid-rhm">
+    <div class="serviceplaceholder" id="xcs1" service="profile" args="article=1" >loading</div>
+    <div class="serviceplaceholder" id="relatedcontent" service="related" args="article=1" >loading</div>
+  </div>
+  <div class="grid-item grid-subcontent1">
+    <div class="serviceplaceholder" id="network" service="discussions" args="article=1" >loading</div>
+  </div>
+  <div class="grid-item grid-subcontent2">
+    <div class="serviceplaceholder" id="insights" service="insights" args="article=1" >loading</div>
+  </div>
+  <div class="grid-item grid-footer">
+    Footer notes
+  </div>
+</div>

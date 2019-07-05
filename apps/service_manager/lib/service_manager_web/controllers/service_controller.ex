@@ -5,8 +5,8 @@ defmodule ServiceManagerWeb.ServiceController do
   alias ServiceManager.Services.Service
 
   def proces(conn, %{"services" => services}) do
-    callback = ServiceComponents.proces_services(services)
-    result = ServiceComponents.get_services(callback)
+    callback = ServiceManager.ServiceComponents.proces_services(services)
+    result = ServiceManager.ServiceComponents.get_services(callback)
     render(conn, "index.json", response: [services: result, callback: callback])
   end
 

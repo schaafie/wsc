@@ -16,6 +16,7 @@ defmodule ServiceManagerWeb.Router do
   scope "/", ServiceManagerWeb do
     pipe_through :browser
     get "/", PageController, :index
+    get "/test", PageController, :test
     resources "/services", ServiceController
   end
 
