@@ -5,14 +5,18 @@ defmodule ServiceManagerWeb.ServiceController do
 
   def proces(conn,%{"data" => params}) do
     %{"services" => servicelist} = Jason.decode!(params)
-    callback = ServiceManager.ServiceComponents.proces_services(servicelist)
-    result = ServiceManager.ServiceComponents.get_services(callback)
-    render(conn, "index.json", response: [services: result, callback: callback])
+    case ServiceManager.ServiceComponents.proces_services(servicelist) do
+      "" ->
+        render(conn, "services.json", response: [services: [], callback: ""])
+      callback ->
+        result = ServiceManager.ServiceComponents.get_services(callback)
+        render(conn, "services.json", response: [services: result, callback: callback])
+    end
   end
 
   def procesUpdate(conn, %{"callback" => callback}) do
     result = ServiceManager.ServiceComponents.get_services(callback)
-    render(conn, "index.json", response: [services: result, callback: callback])
+    render(conn, "services.json", response: [services: result, callback: callback])
   end
 
   def index(conn, _params) do

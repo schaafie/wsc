@@ -7,6 +7,11 @@ defmodule ServiceManager.ServiceComponents do
   alias ServiceProvider.ServiceCoordinator
 
   @doc """
+  Stop proces of list of services when list is empty.
+  """
+  def proces_services([]), do: ""
+
+  @doc """
   Start proces of list of services.
   Returns an identifier to retrieve processed Services
   """
@@ -14,8 +19,21 @@ defmodule ServiceManager.ServiceComponents do
     servicenumber = System.unique_integer([])
     wsc_name = "wsc_#{servicenumber}"
     ProviderSupervisor.start_child(wsc_name)
-    ServiceCoordinator.start(wsc_name, serviceslist)
+    ServiceCoordinator.start(wsc_name, enrich_services(serviceslist))
     wsc_name
+  end
+
+  def enrich_services(list), do: enrich_services([],list)
+  def enrich_services(ulist,[]), do: ulist
+  def enrich_services(ulist,[item|olist]) do
+    case ServiceManager.Services.get_service_by_name(Map.get(item, "service")) do
+      nil ->
+        uitem = Map.put_new(item, :url, "")
+        enrich_services([uitem|ulist],olist)
+      result ->
+        uitem = Map.put_new(item, :url, result.url)
+        enrich_services([uitem|ulist],olist)
+    end
   end
 
   @doc """

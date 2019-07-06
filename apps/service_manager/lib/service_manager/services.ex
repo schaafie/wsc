@@ -10,44 +10,23 @@ defmodule ServiceManager.Services do
 
   @doc """
   Returns the list of services.
-
-  ## Examples
-
-      iex> list_services()
-      [%Service{}, ...]
-
   """
-  def list_services do
-    Repo.all(Service)
-  end
+  def list_services, do: Repo.all(Service)
 
   @doc """
-  Gets a single service.
-
+  Gets a single service by Id.
   Raises `Ecto.NoResultsError` if the Service does not exist.
-
-  ## Examples
-
-      iex> get_service!(123)
-      %Service{}
-
-      iex> get_service!(456)
-      ** (Ecto.NoResultsError)
-
   """
   def get_service!(id), do: Repo.get!(Service, id)
 
   @doc """
+  Gets a single service by Name.
+  Raises `Ecto.NoResultsError` if the Service does not exist.
+  """
+  def get_service_by_name(name), do: Repo.get_by(Service, name: name)
+
+  @doc """
   Creates a service.
-
-  ## Examples
-
-      iex> create_service(%{field: value})
-      {:ok, %Service{}}
-
-      iex> create_service(%{field: bad_value})
-      {:error, %Ecto.Changeset{}}
-
   """
   def create_service(attrs \\ %{}) do
     %Service{}
@@ -57,15 +36,6 @@ defmodule ServiceManager.Services do
 
   @doc """
   Updates a service.
-
-  ## Examples
-
-      iex> update_service(service, %{field: new_value})
-      {:ok, %Service{}}
-
-      iex> update_service(service, %{field: bad_value})
-      {:error, %Ecto.Changeset{}}
-
   """
   def update_service(%Service{} = service, attrs) do
     service
@@ -75,30 +45,11 @@ defmodule ServiceManager.Services do
 
   @doc """
   Deletes a Service.
-
-  ## Examples
-
-      iex> delete_service(service)
-      {:ok, %Service{}}
-
-      iex> delete_service(service)
-      {:error, %Ecto.Changeset{}}
-
   """
-  def delete_service(%Service{} = service) do
-    Repo.delete(service)
-  end
+  def delete_service(%Service{} = service), do: Repo.delete(service)
 
   @doc """
   Returns an `%Ecto.Changeset{}` for tracking service changes.
-
-  ## Examples
-
-      iex> change_service(service)
-      %Ecto.Changeset{source: %Service{}}
-
   """
-  def change_service(%Service{} = service) do
-    Service.changeset(service, %{})
-  end
+  def change_service(%Service{} = service), do: Service.changeset(service, %{})
 end

@@ -15,7 +15,6 @@ defmodule ServiceProvider.ServiceCoordinator do
   def init(state), do: {:ok, state}
 
   def handle_call({:start, list}, from, state) do
-    Logger.info("Handle call start: #{inspect(list)}")
     serviceslist = start_services(list)
     {:noreply, serviceslist}
   end
@@ -36,11 +35,7 @@ defmodule ServiceProvider.ServiceCoordinator do
     {:noreply, updatedservices}
   end
 
-  defp start_services(services_list) do
-    Logger.debug("Processing services: #{inspect(services_list)}")
-
-    start_service([],services_list)
-  end
+  defp start_services(services_list), do: start_service([],services_list)
   defp start_service(started_services, []), do: started_services
   defp start_service(started_services, [service|services_list]) do
     started_service = do_start_service(service)
